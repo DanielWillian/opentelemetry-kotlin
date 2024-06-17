@@ -1,7 +1,9 @@
-package com.example.otel.opentelemetrykotlin.events
+package com.example.otel.opentelemetrykotlin.infrastructure.events
 
-import com.example.otel.opentelemetrykotlin.order.OrderItemCreated
-import com.example.otel.opentelemetrykotlin.order.OrderItemId
+import com.example.otel.opentelemetrykotlin.domain.events.DomainEvent
+import com.example.otel.opentelemetrykotlin.domain.events.DomainEventId
+import com.example.otel.opentelemetrykotlin.domain.order.OrderItemCreated
+import com.example.otel.opentelemetrykotlin.domain.order.OrderItemId
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import java.time.LocalDateTime
 
@@ -10,7 +12,7 @@ const val GROUP_ID = "groupId"
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 interface EventWrapper {
-    val headers: Map<String, String>
+  val headers: Map<String, String>
 }
 
 data class OrderItemCreatedWrapper(
@@ -20,12 +22,9 @@ data class OrderItemCreatedWrapper(
     val itemId: OrderItemId,
     override val headers: Map<String, String>
 ) : EventWrapper {
-    fun toEvent(): OrderItemCreated =
-        OrderItemCreated(
-            eventId = eventId,
-            createdDate = createdDate,
-            updatedDate = updatedDate,
-            itemId = itemId)
+  fun toEvent(): OrderItemCreated =
+      OrderItemCreated(
+          eventId = eventId, createdDate = createdDate, updatedDate = updatedDate, itemId = itemId)
 }
 
 fun OrderItemCreated.toEventWrapper(headers: Map<String, String>): OrderItemCreatedWrapper =
@@ -38,12 +37,12 @@ fun OrderItemCreated.toEventWrapper(headers: Map<String, String>): OrderItemCrea
 
 fun createWrapper(event: DomainEvent): EventWrapper =
     when (event) {
-        is OrderItemCreated -> event.toEventWrapper(mapOf())
-        else -> throw IllegalArgumentException("Unknown event class: ${event::class}")
+      is OrderItemCreated -> event.toEventWrapper(mapOf())
+      else -> throw IllegalArgumentException("Unknown event class: ${event::class}")
     }
 
 fun createEvent(wrapper: EventWrapper): DomainEvent =
     when (wrapper) {
-        is OrderItemCreatedWrapper -> wrapper.toEvent()
-        else -> throw IllegalArgumentException("Unknown wrapper class: ${wrapper::class}")
+      is OrderItemCreatedWrapper -> wrapper.toEvent()
+      else -> throw IllegalArgumentException("Unknown wrapper class: ${wrapper::class}")
     }

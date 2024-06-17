@@ -6,5 +6,5 @@ import org.springframework.boot.runApplication
 @SpringBootApplication class OpentelemetryKotlinApplication
 
 fun main(args: Array<String>) {
-    runApplication<OpentelemetryKotlinApplication>(*args)
+  runApplication<OpentelemetryKotlinApplication>(*args)
 }

@@ -1,7 +1,7 @@
-package com.example.otel.opentelemetrykotlin.order
+package com.example.otel.opentelemetrykotlin.domain.order
 
-import com.example.otel.opentelemetrykotlin.events.DomainEvent
-import com.example.otel.opentelemetrykotlin.events.DomainEventId
+import com.example.otel.opentelemetrykotlin.domain.events.DomainEvent
+import com.example.otel.opentelemetrykotlin.domain.events.DomainEventId
 import java.time.LocalDateTime
 
 data class OrderItemCreated(

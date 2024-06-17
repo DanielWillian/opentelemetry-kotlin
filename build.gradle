@@ -58,6 +58,6 @@ spotless {
 	}
 	kotlin {
 		target '**/*.kt'
-		ktfmt("0.49").dropboxStyle()
+		ktfmt("0.49")
 	}
 }

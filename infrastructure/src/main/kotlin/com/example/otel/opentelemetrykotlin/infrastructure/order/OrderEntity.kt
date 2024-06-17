@@ -1,5 +1,12 @@
-package com.example.otel.opentelemetrykotlin.order
+package com.example.otel.opentelemetrykotlin.infrastructure.order
 
+import com.example.otel.opentelemetrykotlin.domain.order.Order
+import com.example.otel.opentelemetrykotlin.domain.order.OrderId
+import com.example.otel.opentelemetrykotlin.domain.order.OrderItem
+import com.example.otel.opentelemetrykotlin.domain.order.OrderItemId
+import com.example.otel.opentelemetrykotlin.domain.order.OrderItemStatus
+import com.example.otel.opentelemetrykotlin.domain.order.OrderStatus
+import com.example.otel.opentelemetrykotlin.domain.order.Product
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -25,8 +32,8 @@ data class OrderEntity(
     @OneToMany(mappedBy = "orderId", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     val orderItems: List<OrderItemEntity>
 ) {
-    fun toOrder(): Order =
-        Order(id = OrderId(id), status = status, orderItems = orderItems.map { it.toOrderItem() })
+  fun toOrder(): Order =
+      Order(id = OrderId(id), status = status, orderItems = orderItems.map { it.toOrderItem() })
 }
 
 @Entity
@@ -38,6 +45,6 @@ data class OrderItemEntity(
     @Enumerated(EnumType.STRING) val product: Product,
     val quantity: Int
 ) {
-    fun toOrderItem(): OrderItem =
-        OrderItem(id = OrderItemId(id), status = status, product = product, quantity = quantity)
+  fun toOrderItem(): OrderItem =
+      OrderItem(id = OrderItemId(id), status = status, product = product, quantity = quantity)
 }

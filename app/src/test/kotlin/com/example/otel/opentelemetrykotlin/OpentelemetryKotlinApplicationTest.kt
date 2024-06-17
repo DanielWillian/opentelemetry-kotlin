@@ -12,13 +12,13 @@ import org.testcontainers.utility.DockerImageName
 @Testcontainers
 @SpringBootTest
 class OpentelemetryKotlinApplicationTest {
-    @Test fun loadContext() {}
+  @Test fun loadContext() {}
 
-    companion object {
-        @Container @ServiceConnection val postgres = PostgreSQLContainer("postgres:latest")
+  companion object {
+    @Container @ServiceConnection val postgres = PostgreSQLContainer("postgres:latest")
 
-        @Container
-        @ServiceConnection
-        val kafka = KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.3.3"))
-    }
+    @Container
+    @ServiceConnection
+    val kafka = KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.3.3"))
+  }
 }

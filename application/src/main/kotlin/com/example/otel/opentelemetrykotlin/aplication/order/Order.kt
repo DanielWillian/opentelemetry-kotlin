@@ -1,9 +1,14 @@
-package com.example.otel.opentelemetrykotlin.order
+package com.example.otel.opentelemetrykotlin.aplication.order
 
+import com.example.otel.opentelemetrykotlin.domain.order.Order
+import com.example.otel.opentelemetrykotlin.domain.order.OrderItem
+import com.example.otel.opentelemetrykotlin.domain.order.OrderItemStatus
+import com.example.otel.opentelemetrykotlin.domain.order.OrderStatus
+import com.example.otel.opentelemetrykotlin.domain.order.Product
 import java.util.UUID
 
 data class ProductRequest(val product: Product, val quantity: Int) {
-    fun toProductPair(): Pair<Product, Int> = Pair(product, quantity)
+  fun toProductPair(): Pair<Product, Int> = Pair(product, quantity)
 }
 
 data class CreateOrderRequest(val products: List<ProductRequest>)
